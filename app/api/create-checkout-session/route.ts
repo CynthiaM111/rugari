@@ -1,8 +1,18 @@
 // STRIPE INTEGRATION - COMMENTED OUT
-// Uncomment to re-enable Stripe payment processing
+// This file is kept as a placeholder. Uncomment the code below to re-enable Stripe payment processing.
+
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(request: NextRequest) {
+  return NextResponse.json(
+    { error: 'Payment processing is currently disabled. Please contact us for donation options.' },
+    { status: 503 }
+  )
+}
 
 /*
-import { NextRequest, NextResponse } from 'next/server'
+// Uncomment below to re-enable Stripe integration:
+
 import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
