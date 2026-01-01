@@ -1,11 +1,16 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+// STRIPE INTEGRATION - COMMENTED OUT
+// import { useState, useEffect, Suspense } from 'react'
+// import { useSearchParams } from 'next/navigation'
 
-function GetInvolvedContent() {
+export default function GetInvolved() {
   const [donationAmount, setDonationAmount] = useState('')
+
+  // STRIPE INTEGRATION - COMMENTED OUT
+  /*
   const [donorName, setDonorName] = useState('')
   const [donorEmail, setDonorEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -70,6 +75,7 @@ function GetInvolvedContent() {
       setIsLoading(false)
     }
   }
+  */
 
   return (
     <>
@@ -96,7 +102,8 @@ function GetInvolvedContent() {
             <div className="form-section" style={{ marginTop: '2rem' }}>
               <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-color)' }}>Donate Now</h3>
 
-              {message && (
+              {/* STRIPE INTEGRATION - COMMENTED OUT */}
+              {/* {message && (
                 <div style={{
                   padding: '1rem',
                   marginBottom: '1.5rem',
@@ -108,9 +115,9 @@ function GetInvolvedContent() {
                 }}>
                   {message.text}
                 </div>
-              )}
+              )} */}
 
-              <form onSubmit={handleDonationSubmit}>
+              <form>
                 <div className="form-group">
                   <label htmlFor="amount">Donation Amount (USD)</label>
                   <input
@@ -121,9 +128,7 @@ function GetInvolvedContent() {
                     value={donationAmount}
                     onChange={(e) => setDonationAmount(e.target.value)}
                     min="1"
-                    step="0.01"
                     required
-                    disabled={isLoading}
                   />
                 </div>
                 <div className="form-group">
@@ -133,7 +138,6 @@ function GetInvolvedContent() {
                       type="button"
                       className="btn btn-outline"
                       onClick={() => setDonationAmount('25')}
-                      disabled={isLoading}
                     >
                       $25
                     </button>
@@ -141,7 +145,6 @@ function GetInvolvedContent() {
                       type="button"
                       className="btn btn-outline"
                       onClick={() => setDonationAmount('50')}
-                      disabled={isLoading}
                     >
                       $50
                     </button>
@@ -149,7 +152,6 @@ function GetInvolvedContent() {
                       type="button"
                       className="btn btn-outline"
                       onClick={() => setDonationAmount('100')}
-                      disabled={isLoading}
                     >
                       $100
                     </button>
@@ -157,7 +159,6 @@ function GetInvolvedContent() {
                       type="button"
                       className="btn btn-outline"
                       onClick={() => setDonationAmount('250')}
-                      disabled={isLoading}
                     >
                       $250
                     </button>
@@ -165,42 +166,31 @@ function GetInvolvedContent() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="name">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={donorName}
-                    onChange={(e) => setDonorName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                  />
+                  <input type="text" id="name" name="name" required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={donorEmail}
-                    onChange={(e) => setDonorEmail(e.target.value)}
-                    required
-                    disabled={isLoading}
-                  />
+                  <input type="email" id="email" name="email" required />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{ width: '100%' }}
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Processing...' : 'Proceed to Payment'}
+                <div className="form-group">
+                  <label htmlFor="payment">Payment Method</label>
+                  <select id="payment" name="payment" required>
+                    <option value="">Select payment method</option>
+                    <option value="credit">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank">Bank Transfer</option>
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                  Donate Now
                 </button>
                 <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-light)', textAlign: 'center' }}>
-                  Your donation is secure and processed by Stripe. We&apos;ll send you a receipt for your records.
+                  Your donation is secure and tax-deductible. We&apos;ll send you a receipt for your records.
                 </p>
-                <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--text-light)', textAlign: 'center' }}>
+                {/* STRIPE INTEGRATION - COMMENTED OUT */}
+                {/* <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--text-light)', textAlign: 'center' }}>
                   💳 Secure payment processing via Stripe
-                </p>
+                </p> */}
               </form>
             </div>
           </div>
@@ -344,14 +334,6 @@ function GetInvolvedContent() {
         </div>
       </section>
     </>
-  )
-}
-
-export default function GetInvolved() {
-  return (
-    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
-      <GetInvolvedContent />
-    </Suspense>
   )
 }
 

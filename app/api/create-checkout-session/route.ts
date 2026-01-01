@@ -1,3 +1,7 @@
+// STRIPE INTEGRATION - COMMENTED OUT
+// Uncomment to re-enable Stripe payment processing
+
+/*
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
@@ -53,4 +57,5 @@ export async function POST(request: NextRequest) {
     )
   }
 }
+*/
 
